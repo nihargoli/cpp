@@ -7,10 +7,11 @@ using namespace std;
 
 int main()
 {
-
 	//For this instance of program following are the assumed users:
 	//Ideally this is on server and retrieved based on the card insered.
 	account a1, a2, a3;
+	int option, req_account_no;
+	bool acc_found = false;
 
 	a1.set_no( 1 );
 	a1.set_balance( 1000 );
@@ -30,23 +31,61 @@ int main()
 	list_accs.push_back(a2);
 	list_accs.push_back(a3);
 	
-	atm atm_instance;
-	std::cout<<"Welcome!" << endl <<"Please insert card(Just insert account no to proceed for now)" << endl;	
-	atm_instance.display_menu();
-
-	account *cur_acc;
 	std::list<account>::iterator iter;
-
-	for ( iter = list_accs.begin(); iter != list_accs.end(); iter++ ) {
-		if (  (*iter).get_no() == 1 ) 
+	while ( 1 ) {
+		std::cout<<"Welcome!" << endl <<"Please insert card(Just insert account no to proceed for now)" << endl;
+		cin>>req_account_no;	
+		for ( iter = list_accs.begin(); iter != list_accs.end(); iter++ ) {
+			if (  (*iter).get_no() == req_account_no ) {
+				acc_found = true;
+				break;
+			}
+		}
+		if ( acc_found ) 
 			break;
 	}
-	//std::cout<<iter->get_no();
+	account *cur_acc;
 	cur_acc = &(*iter);	
 	users *u1 = new users;
 	u1->fill_account_details(cur_acc);
-	cout<<u1->user_acc->get_balance();	
+
+	atm atm_instance;
+	int amt;
+	while ( 1 ) {
+		atm_instance.display_menu();
+		cin>>option;
+
+		//1.Load cash
+		//2.Withdraw cash
+		//3.Change Pin
+		//4.Check Available balance
+		//5.Exit
+		
+		switch ( option ) {
+			case 1:
+				cout<<"Enter amount to load";
+				cin>>amt;
+				if ( u1->user_acc->set_balance(amt) )
+					cout<<"cash loaded successfully"<<endl;
+				else
+					continue;
+				break;
+			case 2:
+				cout<<"Enter withdrawl amount";
+				cin>>amt;
+				if ( u1->user_acc->withdraw_balance(amt) )
+					cout<<"Withdrawn successfully";
+				break;
+			case 5:
+				break;
+			default:
+				cout<<"Invalid option.. quiting now.. try again! ";
+				continue;
+				break;
+		}
+		break;
+	}
+	//std::cout<<iter->get_no();
 	delete u1;
 	//atm_instance.
-
 }
