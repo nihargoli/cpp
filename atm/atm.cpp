@@ -17,9 +17,7 @@ bool atm::validate_card() {
 bool atm::print_receipt() {
 
 }
-/*
 int main(){
 	atm a1;
 	a1.print_receipt();
 }
-*/

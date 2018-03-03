@@ -4,13 +4,13 @@
 
 class users {
 	private: 
-		accounts a1;
+		class accounts::account a1;
 	public:
-		fill_account_details();
-		load_cash();
-		withdraw_cash();
-		check_balance();
-		change_pin();
+		bool fill_account_details();
+		bool load_cash();
+		int withdraw_cash();
+		long int check_balance();
+		int change_pin();
 };
 
 #endif
