@@ -1,7 +1,7 @@
 #include "users.h"
 
-bool fill_account_details(){
-
+bool users::fill_account_details( class account *acc ){
+	users::user_acc = acc;	
 }
                 
 bool load_cash() {

@@ -4,14 +4,14 @@
 
 class users {
 	private: 
-		class account a1;
 		//class atm atm_machine;
 	public: 
-		bool fill_account_details();
-		bool load_cash();
-		int withdraw_cash();
+		class account *user_acc;
 		long int check_balance();
-		int change_pin();
+		bool     fill_account_details( class account * );
+		bool     load_cash();
+		int      withdraw_cash();
+		int      change_pin();
 };
 
 #endif

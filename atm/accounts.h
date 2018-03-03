@@ -6,18 +6,43 @@ enum account_type {
 };
 class account {
 	private:
-		long int *acc_no;
-		long int *acc_bal;
-		int      acc_type;
-		int      *acc_pin;
-	protected:
-		bool set_acc_no( long int * );
-		bool set_acc_type( int );
-		bool set_balance( long int * );
-		bool set_pin( int * );
-		long int get_acc_no();
-		int  get_acc_type();
-		long int get_available_balance();
-		int get_pin();
+		long int acc_no;
+		long int acc_bal = 0;
+		int acc_type;
+		int acc_pin;
+	public:	
+		bool set_no( long int account_no ) {
+			acc_no = account_no;
+		}
+		
+		bool set_type( int ) {
+		
+		}
+		
+		bool set_balance( long int balance ) {
+			acc_bal = acc_bal + balance;
+		}
+		
+		bool set_pin( int pin ) {
+			acc_pin = pin;
+		}
+		
+		
+		long int get_no() { 
+			return acc_no;
+		} 
+		
+		int get_type() {
+		
+		}
+		
+		long int get_balance() {
+			return acc_bal;
+		}
+		
+		int get_pin() {
+			return acc_pin;
+		}
+
 };
 #endif
