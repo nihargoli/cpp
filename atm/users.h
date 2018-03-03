@@ -4,8 +4,9 @@
 
 class users {
 	private: 
-		class accounts::account a1;
-	public:
+		class account a1;
+		//class atm atm_machine;
+	public: 
 		bool fill_account_details();
 		bool load_cash();
 		int withdraw_cash();
