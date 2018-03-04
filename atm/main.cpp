@@ -63,23 +63,45 @@ int main()
 		
 		switch ( option ) {
 			case 1:
-				cout<<"Enter amount to load";
+				cout<<"Enter amount to load" << endl;
 				cin>>amt;
 				if ( u1->user_acc->set_balance(amt) )
 					cout<<"cash loaded successfully"<<endl;
-				else
-					continue;
+				continue;
 				break;
 			case 2:
-				cout<<"Enter withdrawl amount";
+				cout<<"Enter withdrawl amount" << endl;
 				cin>>amt;
 				if ( u1->user_acc->withdraw_balance(amt) )
-					cout<<"Withdrawn successfully";
+					cout<<"Withdrawn successfully!" <<endl;
+				else
+					cout<<"Failed to withdraw! Retry" << endl;
+				continue;
+				break;
+			case 3:
+				int pin1,pin2; 
+				cout<<"Please enter new pin"<<endl;
+				cin>>pin1;
+				cout<<"Renter new pin"<<endl;
+				cin>>pin2;
+				if ( pin1 == pin2 ) {
+					u1->user_acc->set_pin(0001);
+					cout<<"Pin changed successfully";
+				} else {
+					cout<<"Both pin numbers do not match!";
+				}
+				continue;
+				break;
+			case 4: 
+				cout<<"Available balance is "\
+					<< u1->user_acc->get_balance()\
+					<< endl;
+				continue;
 				break;
 			case 5:
 				break;
 			default:
-				cout<<"Invalid option.. quiting now.. try again! ";
+				cout<<"Invalid option.. try again! "<< endl;
 				continue;
 				break;
 		}

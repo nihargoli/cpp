@@ -28,7 +28,8 @@ class account {
 				return false;
 			else {  
 				//if ( dispense_cash ( ) )
-				set_balance ( acc_bal - amt );
+				//set_balance ( acc_bal - amt );
+				acc_bal  = acc_bal - amt;
 				return true;
 			}
 		}
