@@ -11,7 +11,7 @@ class account {
 		int acc_type;
 		int acc_pin;
 	public:	
-		set_no( long int account_no ) {
+		bool set_no( long int account_no ) {
 			acc_no = account_no;
 		}
 		
@@ -19,7 +19,7 @@ class account {
 		
 		}
 		
-		static bool set_balance( long int balance ) {
+		bool set_balance( long int balance ) {
 			acc_bal = balance;
 		}
 

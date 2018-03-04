@@ -7,8 +7,8 @@ using namespace std;
 
 int main()
 {
-	//For this instance of program following are the assumed users:
-	//Ideally this is on server and retrieved based on the card insered.
+	// For this instance of program following are the assumed users:
+	// Ideally this is on server and retrieved based on the card insered.
 	account a1, a2, a3;
 	int option, req_account_no;
 	bool acc_found = false;
@@ -25,15 +25,19 @@ int main()
 	a3.set_balance( 1000 );
 	a3.set_pin( 1234 );
 	
-	std::list<account> list_accs;
-	
+	// Build list of created accounts..
+	std::list<account> list_accs;	
 	list_accs.push_back(a1);
 	list_accs.push_back(a2);
 	list_accs.push_back(a3);
 	
+	// Iterate through accounts list to pick the choosen account for the current 
+	// transaction 
 	std::list<account>::iterator iter;
 	while ( 1 ) {
-		std::cout<<"Welcome!" << endl <<"Please insert card(Just insert account no to proceed for now)" << endl;
+		std::cout<<"Welcome!" << endl\
+			<<"Please insert card(Just insert account no to proceed for now)"\
+			<< endl;
 		cin>>req_account_no;	
 		for ( iter = list_accs.begin(); iter != list_accs.end(); iter++ ) {
 			if (  (*iter).get_no() == req_account_no ) {
@@ -45,13 +49,16 @@ int main()
 			break;
 	}
 	account *cur_acc;
-	cur_acc = &(*iter);	
+	cur_acc = &(*iter);
+	//cout<<cur_acc->get_balance();	
 	users *u1 = new users;
 	u1->fill_account_details(cur_acc);
 
 	atm atm_instance;
 	int amt, pin;
 	while ( 1 ) {
+		cout<<"===================================================================="\
+			<<endl;
 		atm_instance.display_menu();
 		cin>>option;
 
@@ -70,7 +77,7 @@ int main()
 				continue;
 				break;
 			case 2:
-				cout<<"Enter withdrawl amount" << endl;
+				cout<<"Enter amount to withdraw:" << endl;
 				cin>>amt;	
 				cout<<"Enter pin:";
 				cin>>pin;
@@ -94,10 +101,10 @@ int main()
 					cout<<"Renter new pin"<<endl;
 					cin>>pin2;
 					if ( pin1 == pin2 ) {
-						u1->change_pin(0001);
-						cout<<"Pin changed successfully";
+						u1->change_pin( pin1 );
+						cout<<"Pin changed successfully" << endl;
 					} else {
-						cout<<"Both pin numbers do not match!";
+						cout<<"Both pin numbers do not match!" << endl;
 					}
 				} else {
 					cout<<"Invalid pin."<<endl;
