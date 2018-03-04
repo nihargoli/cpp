@@ -11,7 +11,7 @@ class account {
 		int acc_type;
 		int acc_pin;
 	public:	
-		bool set_no( long int account_no ) {
+		set_no( long int account_no ) {
 			acc_no = account_no;
 		}
 		
@@ -19,20 +19,10 @@ class account {
 		
 		}
 		
-		bool set_balance( long int balance ) {
-			acc_bal = acc_bal + balance;
+		static bool set_balance( long int balance ) {
+			acc_bal = balance;
 		}
 
-		bool withdraw_balance ( long int amt ) {
-			if ( amt > acc_bal )
-				return false;
-			else {  
-				//if ( dispense_cash ( ) )
-				//set_balance ( acc_bal - amt );
-				acc_bal  = acc_bal - amt;
-				return true;
-			}
-		}
 		
 		bool set_pin( int pin ) {
 			acc_pin = pin;

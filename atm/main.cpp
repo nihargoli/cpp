@@ -50,7 +50,7 @@ int main()
 	u1->fill_account_details(cur_acc);
 
 	atm atm_instance;
-	int amt;
+	int amt, pin;
 	while ( 1 ) {
 		atm_instance.display_menu();
 		cin>>option;
@@ -65,37 +65,55 @@ int main()
 			case 1:
 				cout<<"Enter amount to load" << endl;
 				cin>>amt;
-				if ( u1->user_acc->set_balance(amt) )
+				if ( u1->load_cash(amt) )
 					cout<<"cash loaded successfully"<<endl;
 				continue;
 				break;
 			case 2:
 				cout<<"Enter withdrawl amount" << endl;
-				cin>>amt;
-				if ( u1->user_acc->withdraw_balance(amt) )
-					cout<<"Withdrawn successfully!" <<endl;
-				else
-					cout<<"Failed to withdraw! Retry" << endl;
+				cin>>amt;	
+				cout<<"Enter pin:";
+				cin>>pin;
+				if ( u1->validate_pin( pin ) ) {
+					if ( u1->withdraw_cash(amt) )
+						cout<<"Withdrawn successfully!" <<endl;
+					else
+						cout<<"Failed to withdraw! Retry" << endl;
+				} else {
+					cout<<"Invalid pin." << endl;
+				}
 				continue;
 				break;
 			case 3:
 				int pin1,pin2; 
-				cout<<"Please enter new pin"<<endl;
-				cin>>pin1;
-				cout<<"Renter new pin"<<endl;
-				cin>>pin2;
-				if ( pin1 == pin2 ) {
-					u1->user_acc->set_pin(0001);
-					cout<<"Pin changed successfully";
+				cout<<"Enter current pin:"<<endl;
+				cin>>pin;
+				if ( u1->validate_pin( pin ) ) {
+					cout<<"Please enter new pin"<<endl;
+					cin>>pin1;
+					cout<<"Renter new pin"<<endl;
+					cin>>pin2;
+					if ( pin1 == pin2 ) {
+						u1->change_pin(0001);
+						cout<<"Pin changed successfully";
+					} else {
+						cout<<"Both pin numbers do not match!";
+					}
 				} else {
-					cout<<"Both pin numbers do not match!";
+					cout<<"Invalid pin."<<endl;
 				}
 				continue;
 				break;
 			case 4: 
-				cout<<"Available balance is "\
-					<< u1->user_acc->get_balance()\
-					<< endl;
+				cout<<"Enter pin: "<<endl;
+				cin>>pin;		
+				if ( u1->validate_pin( pin ) ) {
+					cout<<"Available balance is "\
+						<< u1->check_balance()\
+						<< endl;
+				} else {
+					cout<<"Invalid pin." << endl;
+				}
 				continue;
 				break;
 			case 5:
