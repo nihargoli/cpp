@@ -63,10 +63,10 @@ int main()
 	std::list<account>::iterator iter;
 	while ( 1 ) {
 		std::cout<<"==============================================================="\
+			<<endl;
 		std::cout<<"Welcome!" << endl\
 			<<"Please insert card(Just insert account no to proceed for now)"\
 			<< endl;
-		//cin>>req_account_no;
 		cin>>req_account_no; 
 		if ( validate_input_type( req_account_no , ACCOUNT_NO_LEN )  ) {
 			for ( iter = list_accs.begin(); iter != list_accs.end(); iter++ ) {
@@ -75,15 +75,12 @@ int main()
 					break;
 				}
 			}
-		}// else {
-		//	cin.clear();
-		//}
+		}
 		if ( acc_found ) 
 			break;
 	}
 	account *cur_acc;
 	cur_acc = &(*iter);
-	//cout<<cur_acc->get_balance();	
 	users *u1 = new users;
 	u1->fill_account_details(cur_acc);
 
@@ -175,7 +172,5 @@ int main()
 		}
 		break;
 	}
-	//std::cout<<iter->get_no();
 	delete u1;
-	//atm_instance.
 }

@@ -29,9 +29,7 @@ class account {
 
 		
 		bool set_pin( string pin ) {
-			cout<<acc_pin<<" "<<pin<<endl; 
 			acc_pin = pin;
-			cout<<acc_pin<<" "<<pin<<endl;
 		}
 		
 		string get_no() { 
