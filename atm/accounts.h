@@ -1,17 +1,20 @@
 #ifndef _acc_class_h
 #define _acc_class_h
+using namespace std;
+#include <string>
+#include <iostream>
 enum account_type {
 	SAVINS = 0,
 	CURRENT = 1
 };
 class account {
 	private:
-		long int acc_no;
+		string acc_no;
 		long int acc_bal = 0;
 		int acc_type;
-		int acc_pin;
+		string acc_pin;
 	public:	
-		bool set_no( long int account_no ) {
+		bool set_no( string account_no ) {
 			acc_no = account_no;
 		}
 		
@@ -24,12 +27,13 @@ class account {
 		}
 
 		
-		bool set_pin( int pin ) {
+		bool set_pin( string pin ) {
+			cout<<acc_pin<<" "<<pin<<endl; 
 			acc_pin = pin;
+			cout<<acc_pin<<" "<<pin<<endl;
 		}
 		
-		
-		long int get_no() { 
+		string get_no() { 
 			return acc_no;
 		} 
 		
@@ -41,7 +45,7 @@ class account {
 			return acc_bal;
 		}
 		
-		int get_pin() {
+		string get_pin() {
 			return acc_pin;
 		}
 

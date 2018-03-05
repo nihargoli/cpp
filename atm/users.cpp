@@ -1,4 +1,6 @@
 #include "users.h"
+using namespace std;
+#include <string>
 
 bool users::fill_account_details( class account *acc ){
 	users::user_acc = acc;	
@@ -21,12 +23,12 @@ long int users::check_balance() {
 	return ( users::user_acc->get_balance() );
 }
                 
-bool users::change_pin( int pin ) { 
+bool users::change_pin( string pin ) { 
 	users::user_acc->set_pin( pin );
 	return true;
 }
 
-bool users::validate_pin( int pin ) {
+bool users::validate_pin( string pin ) {
 	if ( users::user_acc->get_pin() == pin )
 		return true;
 	else

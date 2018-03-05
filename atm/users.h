@@ -1,6 +1,8 @@
 #include "accounts.h"
 #ifndef _users_h
 #define _users_h
+using namespace std;
+#include <string>
 
 class users {
 	private: 
@@ -10,9 +12,9 @@ class users {
 		long int check_balance();
 		bool     fill_account_details( class account * );
 		bool     load_cash( long int );
-		bool     validate_pin( int pin );
+		bool     validate_pin( string pin );
 		bool     withdraw_cash( long int );
-		bool     change_pin( int pin );
+		bool     change_pin( string pin );
 
 };
 

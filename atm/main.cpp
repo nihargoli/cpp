@@ -1,29 +1,55 @@
 #include "atm.h"
 #include "accounts.h"
 #include "users.h"
+#define ACCOUNT_NO_LEN 2
+#define PIN_LEN 4
+
 using namespace std;
 #include "iostream"
 #include "list"
+#include "string"
+
+//Takes two arguments.
+//#1 - input string
+//#2 - Number of allowed digits.
+bool validate_input_type( std::string result , int no )
+{
+    bool ok = false;
+    if (result.length() == no)
+    {
+            bool allDigits = true;
+            for(unsigned index = 0; index < no; ++index)
+            {
+                allDigits = allDigits && ( 
+                    (result[index] >= '0') && 
+                    (result[index] <='9') 
+                    );
+            }
+            ok = allDigits;
+    }
+    return ok;
+}
 
 int main()
 {
 	// For this instance of program following are the assumed users:
 	// Ideally this is on server and retrieved based on the card insered.
 	account a1, a2, a3;
-	int option, req_account_no;
+	int option;
+	string req_account_no;
 	bool acc_found = false;
 
-	a1.set_no( 1 );
+	a1.set_no( "11" );
 	a1.set_balance( 1000 );
-	a1.set_pin( 1234 );
+	a1.set_pin( "1234" );
 
-	a2.set_no( 2 );
+	a2.set_no( "12" );
 	a2.set_balance( 1000 );
-	a2.set_pin( 1234 );
+	a2.set_pin( "1234" );
 	
-	a3.set_no( 3 );
+	a3.set_no( "13" );
 	a3.set_balance( 1000 );
-	a3.set_pin( 1234 );
+	a3.set_pin( "1234" );
 	
 	// Build list of created accounts..
 	std::list<account> list_accs;	
@@ -35,16 +61,22 @@ int main()
 	// transaction 
 	std::list<account>::iterator iter;
 	while ( 1 ) {
+		std::cout<<"==============================================================="\
 		std::cout<<"Welcome!" << endl\
 			<<"Please insert card(Just insert account no to proceed for now)"\
 			<< endl;
-		cin>>req_account_no;	
-		for ( iter = list_accs.begin(); iter != list_accs.end(); iter++ ) {
-			if (  (*iter).get_no() == req_account_no ) {
-				acc_found = true;
-				break;
+		//cin>>req_account_no;
+		cin>>req_account_no; 
+		if ( validate_input_type( req_account_no , ACCOUNT_NO_LEN )  ) {
+			for ( iter = list_accs.begin(); iter != list_accs.end(); iter++ ) {
+				if (  (*iter).get_no() == req_account_no ) {
+					acc_found = true;
+					break;
+				}
 			}
-		}
+		}// else {
+		//	cin.clear();
+		//}
 		if ( acc_found ) 
 			break;
 	}
@@ -55,19 +87,18 @@ int main()
 	u1->fill_account_details(cur_acc);
 
 	atm atm_instance;
-	int amt, pin;
+	int amt;
+	std::string pin, pin1, pin2; 
 	while ( 1 ) {
 		cout<<"===================================================================="\
 			<<endl;
 		atm_instance.display_menu();
 		cin>>option;
-
 		//1.Load cash
 		//2.Withdraw cash
 		//3.Change Pin
 		//4.Check Available balance
 		//5.Exit
-		
 		switch ( option ) {
 			case 1:
 				cout<<"Enter amount to load" << endl;
@@ -81,6 +112,10 @@ int main()
 				cin>>amt;	
 				cout<<"Enter pin:";
 				cin>>pin;
+				if ( !validate_input_type( pin, PIN_LEN ) ) {
+					cout<<"Invalid entry!" << endl;
+					continue;
+				}
 				if ( u1->validate_pin( pin ) ) {
 					if ( u1->withdraw_cash(amt) )
 						cout<<"Withdrawn successfully!" <<endl;
@@ -92,15 +127,18 @@ int main()
 				continue;
 				break;
 			case 3:
-				int pin1,pin2; 
 				cout<<"Enter current pin:"<<endl;
 				cin>>pin;
+				if ( !validate_input_type( pin, PIN_LEN) ) {
+					cout<<"Invalid entry!" << endl; 
+					continue;
+				}
 				if ( u1->validate_pin( pin ) ) {
 					cout<<"Please enter new pin"<<endl;
 					cin>>pin1;
 					cout<<"Renter new pin"<<endl;
 					cin>>pin2;
-					if ( pin1 == pin2 ) {
+					if ( pin1 == pin2 )  {
 						u1->change_pin( pin1 );
 						cout<<"Pin changed successfully" << endl;
 					} else {
@@ -114,6 +152,10 @@ int main()
 			case 4: 
 				cout<<"Enter pin: "<<endl;
 				cin>>pin;		
+				if ( !validate_input_type( pin, PIN_LEN ) ) {
+					cout<<"Invalid entry!" << endl; 
+					continue;
+				}
 				if ( u1->validate_pin( pin ) ) {
 					cout<<"Available balance is "\
 						<< u1->check_balance()\
