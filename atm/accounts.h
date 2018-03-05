@@ -7,6 +7,7 @@ enum account_type {
 	SAVINS = 0,
 	CURRENT = 1
 };
+
 class account {
 	private:
 		string acc_no;

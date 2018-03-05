@@ -30,6 +30,7 @@ bool validate_input_type( std::string result , int no )
     return ok;
 }
 
+// Begin
 int main()
 {
 	// For this instance of program following are the assumed users:
