@@ -1,3 +1,8 @@
+/*
+ A user class holds an object of accouts class
+ and operations are performed on this user.
+*/
+
 #include "accounts.h"
 #ifndef _users_h
 #define _users_h

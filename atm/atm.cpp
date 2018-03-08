@@ -1,3 +1,6 @@
+/*
+ Unused in the code
+*/
 #include "atm.h"
 using namespace std;
 #include "iostream"

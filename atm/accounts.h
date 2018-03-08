@@ -1,3 +1,7 @@
+/*
+ Class holding account details
+*/
+
 #ifndef _acc_class_h
 #define _acc_class_h
 using namespace std;

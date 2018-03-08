@@ -1,5 +1,12 @@
-#ifndef _test_
-#define _test_
+/*
+ Following code is atm state machine.
+ Consisting of following states
+ #1. No card state 
+ #2. Card validated
+ #3. Card Ejected
+*/
+#ifndef _atm_sm_
+#define _atm_sm_
 #include <iostream>
 using namespace std;
 
