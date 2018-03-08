@@ -1,6 +1,7 @@
 #include "atm.h"
 #include "accounts.h"
 #include "users.h"
+#include "atm_state_machine.h"
 #define ACCOUNT_NO_LEN 2
 #define PIN_LEN 4
 
@@ -58,15 +59,14 @@ int main()
 	list_accs.push_back(a2);
 	list_accs.push_back(a3);
 	
+	// Create atm context object and change states accordingly.
+	atm_context ac( new no_card_inserted );
+	
 	// Iterate through accounts list to pick the choosen account for the current 
 	// transaction 
 	std::list<account>::iterator iter;
 	while ( 1 ) {
-		std::cout<<"==============================================================="\
-			<<endl;
-		std::cout<<"Welcome!" << endl\
-			<<"Please insert card(Just insert account no to proceed for now)"\
-			<< endl;
+		ac.display_helper();
 		cin>>req_account_no; 
 		if ( validate_input_type( req_account_no , ACCOUNT_NO_LEN )  ) {
 			for ( iter = list_accs.begin(); iter != list_accs.end(); iter++ ) {
@@ -78,19 +78,21 @@ int main()
 		}
 		if ( acc_found ) 
 			break;
+		else {
+			cout<<"Invalid account entry"<<endl;
+		}
 	}
 	account *cur_acc;
 	cur_acc = &(*iter);
 	users *u1 = new users;
 	u1->fill_account_details(cur_acc);
 
-	atm atm_instance;
+	//atm atm_instance;
 	int amt;
 	std::string pin, pin1, pin2; 
+	ac.state_change();
 	while ( 1 ) {
-		cout<<"===================================================================="\
-			<<endl;
-		atm_instance.display_menu();
+		ac.display_helper();
 		cin>>option;
 		//1.Load cash
 		//2.Withdraw cash
@@ -172,5 +174,7 @@ int main()
 		}
 		break;
 	}
+	// Exit from atm state machine
+	ac.state_change();
 	delete u1;
 }
