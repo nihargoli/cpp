@@ -16,14 +16,17 @@ public:
         p = new int(*(cp.p));
         p1 = cp.p1;
     };
+     // C++11 keyword to restrict copy constructor
+    //copyCtor(const copyCtor &cp) = delete;
+
     copyCtor & operator = (const copyCtor &cp) {
         p = new int(*(cp.p));
         // p1 = *(cp.p1);
         return *this;
     }
 
-    int operator + (const copyCtor *cp) {
-        return (p1 + cp->p1);
+    int operator + (const copyCtor &cp) {
+        return (p1 + cp.p1);
     }
     void printP() const {
         cout << *p << " " << p1  << endl;
@@ -42,7 +45,7 @@ int main()
     int a3 = 11;
     copyCtor c1(a1);
     copyCtor c3(a3);
-    cout << c1 + c3 << endl;
+    cout << (c1 + c3) << endl;
     copyCtor c2 = c1;
     c3 = c1;
     c1.printP();
