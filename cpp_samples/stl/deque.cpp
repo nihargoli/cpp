@@ -28,10 +28,18 @@ int main(int argc, char *argv[])
 
     cout << endl;
     items.pop_front();
-
     for (auto& i : items) {
         cout << i  << endl;
     }
+
+    cout << endl;
+
+    deque<string>::iterator it = items.begin();
+    while(it != items.end()) {
+        cout << *it << endl;
+        it++;
+    }
+
 
     return 0;
 }
